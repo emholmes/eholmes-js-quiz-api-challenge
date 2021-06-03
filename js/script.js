@@ -23,8 +23,8 @@ var scoreFormHandler = function(event) {
     var playerName = document.querySelector("input[name='player-initials']").value;
 
     var scoreObj = {
-        score: playerScore,
-        name: playerName
+        name: playerName,
+        score: playerScore
     };
     createScoreEl(scoreObj);
 
@@ -32,6 +32,7 @@ var scoreFormHandler = function(event) {
 }
 
 var getQuestion = function() {
+    quizSection.style.display = "block";
     if (qIndex < questionsObject.length) {
         var tempDiv = document.createElement("div");
         tempDiv.className = "tempDiv";
@@ -41,7 +42,7 @@ var getQuestion = function() {
         document.getElementById("questions").appendChild(tempDiv);
         tempDiv.appendChild(question);
 
-        // previous question results
+        // previous question results -- move to HTML
         var results = document.createElement("p");
         results.style.display = "block";
         results.className = "results";
@@ -73,6 +74,9 @@ var getQuestion = function() {
     } else {
         quizResultsSection.style.display = "block";
         document.getElementById("final-score").textContent = "Your final score is " + points;
+        
+        // need a reset function
+        qIndex = 0;
     }
 }
 
@@ -80,9 +84,9 @@ var createScoreEl = function(scoreObj) {
     var listItem = document.createElement("li");
     listItem.classname = "score";
     //add code to enter score details - use score Obj
-    listItem.textContent = scoreObj.name;
-    var ulElement = document.getElementById("scores-list");
-    ulElement.appendChild(listItem);
+    listItem.textContent = scoreObj.name + " - " + scoreObj.score;
+    var olElement = document.getElementById("scores-list");
+    olElement.appendChild(listItem);
     player.push(scoreObj);
 
 }
