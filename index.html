@@ -4,25 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/styles.css" />
     <title>Javascript Code Quiz</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
+    <header>
+        <nav>
             <p>View high scores</p>
             <p id="timer"></p>
-        </div>
-        <div class="row" id="quiz">
-            <div id="intro-content"></div>
+        </nav>
+        <h1>Javascript Code Quiz</h1>
+    </header>
+    <main>
+        <section id="intro-content">
+            <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
+            <button id="startQuizBtn">Start Quiz</button>
+        </section>
+        <section id="quiz">
             <div id="questions"></div>
-        </div>
-        <div class="row" id="quizComplete"></div>
-    </div>
+        </section>
+        <section id="quizComplete">
+            <h3>All done!</h3>
+            <p id="final-score"></p>
+            <form>
+                <label for="player-initials">Enter initials: </label>
+                <input type="text" id="player-initials" name="player-initials">
+                <input type="submit" type="submit" value="Submit">
+            </form>
+        </section>
+    </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>   
     <script src="./js/script.js"></script> 
 </body>
 </html>

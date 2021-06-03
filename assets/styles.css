@@ -1,3 +1,9 @@
-#intro-content {
+
+
+#intro-content, h1 {
     text-align: center;
+}
+
+#quizComplete {
+    display: none;
 }
