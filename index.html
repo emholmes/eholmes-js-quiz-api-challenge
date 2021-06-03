@@ -10,13 +10,14 @@
 <body>
     <header>
         <nav>
-            <p>View high scores</p>
+            <p id="view-scores">View high scores</p>
             <p id="timer"></p>
         </nav>
-        <h1>Javascript Code Quiz</h1>
     </header>
+    
     <main>
-        <section id="intro-content">
+        <section class="hero" id="hero">
+            <h1>Javascript Code Quiz</h1>
             <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
             <button id="startQuizBtn">Start Quiz</button>
         </section>
@@ -31,6 +32,12 @@
                 <input type="text" id="player-initials" name="player-initials">
                 <input type="submit" type="submit" value="Submit">
             </form>
+        </section>
+        <section id="high-scores">
+            <h3>High scores</h3>
+            <ul id="scores-list"></ul>
+            <button id="back">Go back</button>
+            <button id="clear">Clear high scores</button>
         </section>
     </main>
 

@@ -25,11 +25,12 @@ var questionsObject = [
     }
 ]
 
-var intro = document.getElementById("intro-content");
+var heroArea = document.getElementById("hero");
 
 var qIndex = 0;
 var correct;
 var points = 0;
+var player = [];
 
 var getQuestion = function() {
     if (qIndex < questionsObject.length) {
@@ -78,16 +79,35 @@ var getQuestion = function() {
         quizComplete.style.display = "block";
         var finalScoreReport = document.getElementById("final-score");
         finalScoreReport.textContent = "Your final score is " + points;
-        saveScore();
+        //saveScore();
     }
 }
+
+// view high scores link
+document.getElementById("view-scores").addEventListener("click", function() {
+    document.querySelector("header").style.display = "none";
+    document.getElementById("hero").style.display = "none";
+    document.getElementById("quiz").style.display = "none";
+    document.getElementById("quizComplete").style.display = "none";
+    document.getElementById("high-scores").style.display = "block";
+});
+
+//go back button
+document.getElementById("back").addEventListener("click", function(){
+    document.querySelector("header").style.display = "block";
+    document.getElementById("hero").style.display = "block";
+    document.getElementById("quiz").style.display = "none";
+    document.getElementById("quizComplete").style.display = "none";
+    document.getElementById("high-scores").style.display = "none";
+})
+
 
 var saveScore = function() {
     localStorage.setItem("high score", points);
 }
 
 var startQuiz = function() {
-    intro.style.display = "none";
+    heroArea.style.display = "none";
 
     //create dom elements for q & a
     
@@ -96,5 +116,4 @@ var startQuiz = function() {
 
 }
 
-var startQuizBtn = document.getElementById("startQuizBtn");
-startQuizBtn.addEventListener("click", startQuiz);
+document.getElementById("startQuizBtn").addEventListener("click", startQuiz);
