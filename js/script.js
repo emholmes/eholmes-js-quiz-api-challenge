@@ -1,3 +1,9 @@
+var headerSection = document.querySelector("header");
+var heroSection = document.getElementById("hero");
+var quizSection = document.getElementById("quiz");
+var quizResultsSection = document.getElementById("quiz-results");
+var highScoresSection = document.getElementById("high-scores");
+
 var questionsObject = [
     {
         q: "What's 1 + 1?", 
@@ -25,7 +31,7 @@ var questionsObject = [
     }
 ]
 
-var heroArea = document.getElementById("hero");
+
 
 var qIndex = 0;
 var correct;
@@ -61,44 +67,39 @@ var getQuestion = function() {
                     tempDiv.style.display = "none";
                     points += 5;
                     correct = true;
-                    console.log(correct);
                     qIndex++;
                     getQuestion();
                 } else {
                     tempDiv.style.display = "none";
                     correct = false;
-                    console.log(correct);
                     qIndex++;
                     getQuestion();
                 }
             });
         }
     } else {
-        
-        var quizComplete = document.getElementById("quizComplete");
-        quizComplete.style.display = "block";
-        var finalScoreReport = document.getElementById("final-score");
-        finalScoreReport.textContent = "Your final score is " + points;
+        quizResultsSection.style.display = "block";
+        document.getElementById("final-score").textContent = "Your final score is " + points;
         //saveScore();
     }
 }
 
 // view high scores link
 document.getElementById("view-scores").addEventListener("click", function() {
-    document.querySelector("header").style.display = "none";
-    document.getElementById("hero").style.display = "none";
-    document.getElementById("quiz").style.display = "none";
-    document.getElementById("quizComplete").style.display = "none";
-    document.getElementById("high-scores").style.display = "block";
+    headerSection.style.display = "none";
+    heroSection.style.display = "none";
+    quizSection.style.display = "none";
+    quizResultsSection.style.display = "none";
+    highScoresSection.style.display = "block";
 });
 
 //go back button
 document.getElementById("back").addEventListener("click", function(){
-    document.querySelector("header").style.display = "block";
-    document.getElementById("hero").style.display = "block";
-    document.getElementById("quiz").style.display = "none";
-    document.getElementById("quizComplete").style.display = "none";
-    document.getElementById("high-scores").style.display = "none";
+    headerSection.style.display = "block";
+    heroSection.style.display = "block";
+    quizSection.style.display = "none";
+    quizResultsSection.style.display = "none";
+    highScoresSection.style.display = "none";
 })
 
 
@@ -107,13 +108,8 @@ var saveScore = function() {
 }
 
 var startQuiz = function() {
-    heroArea.style.display = "none";
-
-    //create dom elements for q & a
-    
+    heroSection.style.display = "none";
     getQuestion();
-    
-
 }
 
 document.getElementById("startQuizBtn").addEventListener("click", startQuiz);
