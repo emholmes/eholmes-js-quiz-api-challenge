@@ -33,9 +33,9 @@ var scoreFormHandler = function(event) {
 
     scoreForm.reset();
 
+    viewHighScoreHandler();
+
 }
-
-
 
 var buttonChoiceHandler = function(e) {
     if (e.target.textContent === questionsObject[qIndex].a) {
@@ -88,14 +88,15 @@ var createScoreEl = function(scoreObj) {
 }
 
 // view high scores link
-// turn in to reusable event handler
-document.getElementById("view-scores").addEventListener("click", function() {
+var viewHighScoreHandler = function() {
     headerSection.style.display = "none";
     heroSection.style.display = "none";
     quizSection.style.display = "none";
     quizResultsSection.style.display = "none";
     highScoresSection.style.display = "block";
-});
+} 
+
+document.getElementById("view-scores").addEventListener("click", viewHighScoreHandler);
 
 //go back button
 document.getElementById("back").addEventListener("click", function(){
