@@ -108,7 +108,16 @@ document.getElementById("back").addEventListener("click", function(){
     quizSection.style.display = "none";
     quizResultsSection.style.display = "none";
     highScoresSection.style.display = "none";
-})
+});
+
+// clear score page
+document.getElementById("clear").addEventListener("click", function(){
+    localStorage.clear();
+    var listItems = document.querySelectorAll("#scores-list li");
+    for (var item of listItems) {
+        item.remove();
+    }
+});
 
 
 var saveScore = function() {
