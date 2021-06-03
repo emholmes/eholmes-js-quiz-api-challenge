@@ -86,16 +86,37 @@ var getQuestion = function() {
             });
         }
     } else {
+        saveScore();
         var quizComplete = document.getElementById("quizComplete");
         var allDone = document.createElement("h2");
         allDone.textContent = "All done!";
         var finalScoreReport = document.createElement("p");
         finalScoreReport.textContent = "Your final score is " + points;
-        // form to enter name
-        
         quizComplete.appendChild(allDone);
         quizComplete.appendChild(finalScoreReport);
+        // form to enter name
+        var entryForm = document.createElement("form");
+        var entryFormLabel = document.createElement("label");
+        entryFormLabel.setAttribute("for", "player-name");
+        var entryFormInput = document.createElement("input");
+        entryFormInput.setAttribute("type", "text");
+        entryFormInput.setAttribute("id", "player-name");
+        entryFormInput.setAttribute("name", "player-name");
+        var entryFormSubmit = document.createElement("button");
+        entryFormSubmit.className = "btn btn-dark";
+        entryFormSubmit.setAttribute("type", "submit");
+        entryFormSubmit.setAttribute("value", "submit");
+        entryFormSubmit.textContent = "Submit";
+        quizComplete.appendChild(entryForm);
+        entryForm.appendChild(entryFormLabel);
+        entryForm.appendChild(entryFormInput);
+        entryForm.appendChild(entryFormSubmit);
+
     }
+}
+
+var saveScore = function() {
+    localStorage.setItem("high score", points);
 }
 
 var startQuiz = function() {
