@@ -42,6 +42,7 @@ intro.appendChild(startQuizBtn);
 
 var qIndex = 0;
 var correct;
+var points = 0;
 
 var getQuestion = function() {
     if (qIndex < questionsObject.length) {
@@ -55,6 +56,7 @@ var getQuestion = function() {
 
         // previous question results
         var results = document.createElement("p");
+        results.style.display = "block";
         results.className = "results";
         results.textContent = correct;
         
@@ -69,6 +71,7 @@ var getQuestion = function() {
             choiceBtn.addEventListener("click", function(e) {
                 if (e.currentTarget.textContent === questionsObject[qIndex].a) {
                     tempDiv.style.display = "none";
+                    points += 5;
                     correct = true;
                     console.log(correct);
                     qIndex++;
@@ -82,6 +85,16 @@ var getQuestion = function() {
                 }
             });
         }
+    } else {
+        var quizComplete = document.getElementById("quizComplete");
+        var allDone = document.createElement("h2");
+        allDone.textContent = "All done!";
+        var finalScoreReport = document.createElement("p");
+        finalScoreReport.textContent = "Your final score is " + points;
+        // form to enter name
+        
+        quizComplete.appendChild(allDone);
+        quizComplete.appendChild(finalScoreReport);
     }
 }
 
