@@ -7,6 +7,7 @@ var questionsObject = [
 var headerSection = document.querySelector("header");
 var heroSection = document.getElementById("hero");
 var quizSection = document.getElementById("quiz");
+var quizContent = document.getElementById("quiz-content");
 var quizResultsSection = document.getElementById("quiz-results");
 var highScoresSection = document.getElementById("high-scores");
 var scoreForm = document.getElementById("score-form");
@@ -29,49 +30,46 @@ var scoreFormHandler = function(event) {
     createScoreEl(scoreObj);
 
     saveScore();
+
+    scoreForm.reset();
+
+}
+
+
+
+var buttonChoiceHandler = function(e) {
+    if (e.target.textContent === questionsObject[qIndex].a) {
+        points += 5;
+        correct = "Correct!";
+        qIndex++;
+        getQuestion();
+    } else {
+        correct = "Wrong!";
+        qIndex++;
+        getQuestion();
+    }
 }
 
 var getQuestion = function() {
-    quizSection.style.display = "block";
+    var notification = document.getElementById("notification");
+        notification.textContent = correct;
+
     if (qIndex < questionsObject.length) {
-        var tempDiv = document.createElement("div");
-        tempDiv.className = "tempDiv";
-        var question = document.createElement("p");  
+        quizContent.style.display = "block";
+        var question = document.getElementById("question");
         question.textContent = questionsObject[qIndex].q;
-        
-        document.getElementById("questions").appendChild(tempDiv);
-        tempDiv.appendChild(question);
+    
+        for (var i = 1; i < 5; i++) {
+            var choiceBtn = document.getElementById("btn" + i);
+            choiceBtn.textContent = questionsObject[qIndex]["choice" + i];
+        }
+        let buttonsArray = document.querySelectorAll("#quiz-content button");
 
-        // previous question results -- move to HTML
-        var results = document.createElement("p");
-        results.style.display = "block";
-        results.className = "results";
-        results.textContent = correct;
-        
-
-        for (var j = 1; j < 5; j++) {
-            var choiceBtn = document.createElement("button");
-            choiceBtn.className = "btn btn-light";
-            choiceBtn.textContent = questionsObject[qIndex]["choice" + j];
-            tempDiv.appendChild(choiceBtn);
-            tempDiv.appendChild(results);
-
-            choiceBtn.addEventListener("click", function(e) {
-                if (e.currentTarget.textContent === questionsObject[qIndex].a) {
-                    tempDiv.style.display = "none";
-                    points += 5;
-                    correct = true;
-                    qIndex++;
-                    getQuestion();
-                } else {
-                    tempDiv.style.display = "none";
-                    correct = false;
-                    qIndex++;
-                    getQuestion();
-                }
-            });
+        for (var button of buttonsArray) {
+            button.addEventListener("click", buttonChoiceHandler);
         }
     } else {
+        quizContent.style.display = "none";
         quizResultsSection.style.display = "block";
         document.getElementById("final-score").textContent = "Your final score is " + points;
         
@@ -83,27 +81,27 @@ var getQuestion = function() {
 var createScoreEl = function(scoreObj) {
     var listItem = document.createElement("li");
     listItem.classname = "score";
-    //add code to enter score details - use score Obj
     listItem.textContent = scoreObj.name + " - " + scoreObj.score;
     var olElement = document.getElementById("scores-list");
     olElement.appendChild(listItem);
     player.push(scoreObj);
-
 }
 
 // view high scores link
+// turn in to reusable event handler
 document.getElementById("view-scores").addEventListener("click", function() {
     headerSection.style.display = "none";
     heroSection.style.display = "none";
     quizSection.style.display = "none";
     quizResultsSection.style.display = "none";
     highScoresSection.style.display = "block";
-
-    loadScores();
 });
 
 //go back button
 document.getElementById("back").addEventListener("click", function(){
+    qIndex = 0;
+    correct = "";
+    points = 0;
     headerSection.style.display = "block";
     heroSection.style.display = "block";
     quizSection.style.display = "none";
@@ -130,6 +128,7 @@ var loadScores = function () {
 
 var startQuiz = function() {
     heroSection.style.display = "none";
+    quizSection.style.display = "block";
     getQuestion();
 }
 

@@ -22,17 +22,26 @@
             <button id="startQuizBtn">Start Quiz</button>
         </section>
         <section id="quiz">
-            <div id="questions"></div>
+            <section id="quiz-content">
+                <p id="question"></p>
+                <button id="btn1"></button>
+                <button id="btn2"></button>
+                <button id="btn3"></button>
+                <button id="btn4"></button>
+                <hr>
+            </section>
+            <section id="quiz-results">
+                <h3>All done!</h3>
+                <p id="final-score"></p>
+                <form id="score-form">
+                    <label for="player-initials">Enter initials: </label>
+                    <input type="text" id="player-initials" name="player-initials">
+                    <input type="submit" type="submit" value="Submit">
+                </form>
+            </section>
+            <p id="notification"></p>
         </section>
-        <section id="quiz-results">
-            <h3>All done!</h3>
-            <p id="final-score"></p>
-            <form id="score-form">
-                <label for="player-initials">Enter initials: </label>
-                <input type="text" id="player-initials" name="player-initials">
-                <input type="submit" type="submit" value="Submit">
-            </form>
-        </section>
+        
         <section id="high-scores">
             <h3>High scores</h3>
             <ol id="scores-list"></ol>

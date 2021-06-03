@@ -1,6 +1,11 @@
 
 
-#intro-content, h1 {
+.hero {
+    text-align: center;
+}
+
+#quiz {
+    display: none;
     text-align: center;
 }
 
