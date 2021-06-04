@@ -136,6 +136,8 @@ var loadScores = function () {
     }
 }
 
+loadScores();
+
 var startQuiz = function() {
     heroSection.style.display = "none";
     quizSection.style.display = "block";
