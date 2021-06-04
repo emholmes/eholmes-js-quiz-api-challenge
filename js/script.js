@@ -1,7 +1,7 @@
 var questionsObject = [
-    { q: "What's 1 + 1?", a: "2", choice1: "4", choice2: "1", choice3: "2", choice4: "0" }, 
-    { q: "What's 1 + 2?", a: "3", choice1: "5", choice2: "3", choice3: "8", choice4: "9" }, 
-    { q: "What Tobi's nickname?", a: "all of the above", choice1: "Toblerone", choice2: "Tobes", choice3: "Tobias", choice4: "all of the above" }
+    { question: "What's 1 + 1?", answer: "2", choice1: "4", choice2: "1", choice3: "2", choice4: "0" }, 
+    { question: "What's 1 + 2?", answer: "3", choice1: "5", choice2: "3", choice3: "8", choice4: "9" }, 
+    { question: "What Tobi's nickname?", answer: "all of the above", choice1: "Toblerone", choice2: "Tobes", choice3: "Tobias", choice4: "all of the above" }
 ]
 
 var headerSection = document.querySelector("header");
@@ -38,7 +38,7 @@ var scoreFormHandler = function(event) {
 }
 
 var buttonChoiceHandler = function(e) {
-    if (e.target.textContent === questionsObject[qIndex].a) {
+    if (e.target.textContent === questionsObject[qIndex].answer) {
         points += 5;
         correct = "Correct!";
         qIndex++;
@@ -57,7 +57,7 @@ var getQuestion = function() {
     if (qIndex < questionsObject.length) {
         quizContent.style.display = "block";
         var question = document.getElementById("question");
-        question.textContent = questionsObject[qIndex].q;
+        question.textContent = questionsObject[qIndex].question;
     
         for (var i = 1; i < 5; i++) {
             var choiceBtn = document.getElementById("btn" + i);
