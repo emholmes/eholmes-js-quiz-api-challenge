@@ -1,7 +1,10 @@
 var questionsObject = [
     { question: "Which are primitive data types in javascript?", answer: "all of the above", choice1: "number", choice2: "string", choice3: "boolean", choice4: "all of the above" }, 
-    { question: "What's 1 + 2?", answer: "3", choice1: "5", choice2: "3", choice3: "8", choice4: "9" }, 
-    { question: "What Tobi's nickname?", answer: "all of the above", choice1: "Toblerone", choice2: "Tobes", choice3: "Tobias", choice4: "all of the above" }
+    { question: "What method stops the setInterval() method's function from continuing to be called?", answer: "clearInterval()", choice1: "stop()", choice2: "stopInterval()", choice3: "clearSet()", choice4: "clearInterval()" }, 
+    { question: "Which of the following are 'falsy' values in javascript?", answer: "all of the above", choice1: "NaN", choice2: "null", choice3: "undefined", choice4: "all of the above" }, 
+    { question: "Select the answer with the correct syntax of a for statement.", answer: "for (var i = 0; i < 10; i++) {}", choice1: "for (var i = 0; i < 10; i++) {}", choice2: "for (var i = 0, i < 10, i++) {}", choice3: "for (i = 0; i++) {}", choice4: "for (if i = 0; i < 10; i++) {}" }, 
+    { question: "Javascript is a _________ programming language.", answer: "dynamic", choice1: "styling", choice2: "java", choice3: "styling", choice4: "dynamic" }, 
+    { question: "What method adds a value to the end of an array?", answer: "push()", choice1: "toEnd()", choice2: "push()", choice3: "join()", choice4: "pop()" }
 ]
 
 var headerSection = document.querySelector("header");
@@ -68,6 +71,8 @@ function startTimer() {
 var buttonChoiceHandler = function(e) {
     var playerChoice = e.target.textContent;
     playerChoice = playerChoice.slice(3);
+    // debugger;
+    clearInterval(hideNotification);
     if (playerChoice === questionsObject[qIndex].answer) {
         correct = "Correct!";
         qIndex++;
@@ -80,21 +85,18 @@ var buttonChoiceHandler = function(e) {
     }
 }
 
-function displayNotification() {
+
+var getQuestion = function() {
     var notificationSection = document.querySelector(".notification");
     notification.textContent = correct;
     if (notification.textContent !== "") {
         notificationSection.style.display = "block";
     }
     hideNotification = setInterval(function() {
-        notificationSection.style.display = "none";
         clearInterval(hideNotification);
-    }, 3000);
-}
-
-var getQuestion = function() {
-    displayNotification();
-
+        notificationSection.style.display = "none";
+        
+    }, 1000);
     if (qIndex < questionsObject.length) {
         quizContent.style.display = "block";
         var question = document.getElementById("question");
@@ -177,7 +179,7 @@ var loadScores = function () {
     savedScores = JSON.parse(savedScores);
 
     for (var i = 0; i < savedScores.length; i++) {
-        createScoreEl(savedScores[i]);
+        createScoreEl(savedScores[i], i);
     }
 }
 

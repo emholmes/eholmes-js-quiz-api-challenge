@@ -7,7 +7,8 @@
 
 :root {
     --navy-blue: #364f6b;
-    --light-grey: #b9b7b7;
+    --grey: #b9b7b7;
+    --light-grey: #efefef;
     --berry-pink: #b72c56;
     --serif: Georgia, serif;
     --sans-serif: Arial, Helvetica, sans-serif;
@@ -28,7 +29,7 @@ h3 {
     font-family: var(--sans-serif);
     font-size: 28px;
     line-height: normal;
-    padding-bottom: 30px;
+    padding-bottom: 15px;
 }
 
 p {
@@ -86,7 +87,7 @@ nav {
 }
 
 #quiz-content button {
-    width: 30%;
+    width: 50%;
     text-align: left;
     margin: 8px 0;
 }
@@ -97,7 +98,7 @@ button {
     font-family: var(--sans-serif);
     margin: 8px auto;
     padding: 10px 20px;
-    border-radius: 15px;
+    border-radius: 10px;
     border: none;
     background-color: var(--navy-blue);
     color: #FFF;
@@ -120,7 +121,7 @@ section .notification {
 
 #notification {
     text-align: left;
-    color: var(--light-grey);
+    color: var(--grey);
     font-family: var(--sans-serif);
     font-size: 24px;
     font-style: italic;
@@ -128,15 +129,76 @@ section .notification {
 }
 
 #score-form label {
-    font-size: 22px;
+    font-size: 20px;
     line-height: normal;
     font-family: var(--sans-serif);
+    vertical-align: text-top;
 }
 
 #quiz-results {
     display: none;
 }
 
+#quiz-results p {
+    font-size: 20px;
+    line-height: normal;
+    padding-bottom: 10px;
+    font-family: var(--sans-serif);
+}
+
 #high-scores {
     display: none;
 }
+
+#high-scores ol {
+    list-style: inside;
+    list-style-type: decimal;
+    margin-bottom: 10px;
+}
+
+#high-scores li {
+    padding: 10px;
+    font-family: var(--sans-serif);
+}
+
+#high-scores li:nth-child(odd) {
+    background-color: var(--light-grey);
+}
+
+#high-scores button {
+    display: inline-block;
+}
+
+#high-scores button:nth-of-type(2) {
+    margin-left: 5px;
+}
+
+.initials-input {
+    height: 40px;
+    width: 250px;
+    padding: 5px;
+}
+
+.submit-btn {
+    font-size: 20px;
+    font-family: var(--sans-serif);
+    margin: 8px auto;
+    padding: 6px 20px;
+    border-radius: 6px;
+    border: none;
+    background-color: var(--navy-blue);
+    color: #FFF;
+    vertical-align: middle;
+}
+
+.submit-btn:hover {
+    cursor: pointer;
+    background-color: var(--berry-pink);
+}
+
+#high-scores {
+    width: 60%;
+    margin: 0 auto;
+    padding-top: 80px;
+}
+
