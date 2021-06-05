@@ -1,5 +1,5 @@
 var questionsObject = [
-    { question: "What's 1 + 1?", answer: "2", choice1: "4", choice2: "1", choice3: "2", choice4: "0" }, 
+    { question: "Which are primitive data types in javascript?", answer: "all of the above", choice1: "number", choice2: "string", choice3: "boolean", choice4: "all of the above" }, 
     { question: "What's 1 + 2?", answer: "3", choice1: "5", choice2: "3", choice3: "8", choice4: "9" }, 
     { question: "What Tobi's nickname?", answer: "all of the above", choice1: "Toblerone", choice2: "Tobes", choice3: "Tobias", choice4: "all of the above" }
 ]
@@ -11,6 +11,7 @@ var quizContent = document.getElementById("quiz-content");
 var quizResultsSection = document.getElementById("quiz-results");
 var highScoresSection = document.getElementById("high-scores");
 var scoreForm = document.getElementById("score-form");
+var notification = document.getElementById("notification");
 
 var qIndex = 0;
 var correct;
@@ -20,6 +21,8 @@ var player = [];
 var scoreFormHandler = function(event) {
     event.preventDefault();
 
+    notification.textContent = "";
+    notification.style.borderTop = "none";
     var playerScore = points;
     var playerName = document.querySelector("input[name='player-initials']").value;
 
@@ -76,8 +79,10 @@ var buttonChoiceHandler = function(e) {
 }
 
 var getQuestion = function() {
-    var notification = document.getElementById("notification");
-        notification.textContent = correct;
+    notification.textContent = correct;
+    if (notification.textContent !== "") {
+        notification.style.borderTop = "1px solid #000";
+    }
 
     if (qIndex < questionsObject.length) {
         quizContent.style.display = "block";
@@ -103,6 +108,7 @@ var getQuestion = function() {
         qIndex = 0;
     }
 }
+
 
 var createScoreEl = function(scoreObj) {
     var listItem = document.createElement("li");

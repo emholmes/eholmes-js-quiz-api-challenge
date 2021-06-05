@@ -7,7 +7,7 @@
 
 :root {
     --navy-blue: #364f6b;
-    --light-grey: #d6d4d4;
+    --light-grey: #b9b7b7;
     --berry-pink: #b72c56;
     --serif: Georgia, serif;
     --sans-serif: Arial, Helvetica, sans-serif;
@@ -68,13 +68,26 @@ nav {
 
 #quiz {
     display: none;
-    text-align: center;
+    width: 52%;
+    margin: 0 auto;
     padding-top: 80px;
+    text-align: center;
+}
+
+#quiz-content {
+    padding-bottom: 30px;
 }
 
 #quiz-content p {
     font-size: 26px;
     line-height: normal;
+    text-align: left;
+}
+
+#quiz-content button {
+    width: 30%;
+    text-align: left;
+    margin: 8px 0;
 }
 
 button {
@@ -94,8 +107,19 @@ button:hover {
     background-color: var(--berry-pink);
 }
 
+/* hr {
+    padding-top: 25px;
+    border: none;
+    border-bottom: 1px solid #000;
+} */
+
 #notification {
+    text-align: left;
+    color: var(--light-grey);
+    font-family: var(--sans-serif);
+    font-size: 24px;
     font-style: italic;
+    padding-top: 15px;
 }
 
 #quiz-results {
