@@ -43,13 +43,17 @@ var timer = document.getElementById("timer");
 var timerInterval;
 function startTimer() {
     timeLeft = 75;
+    timer.textContent = "Time: "+ timeLeft;
     // execute function ever 1000 ms
     timerInterval = setInterval(function() {
         // qIndex max length 2
         if (timeLeft > 0) {
-            timer.textContent = "Time: "+ timeLeft;
             timeLeft--;
-        }  
+            timer.textContent = "Time: "+ timeLeft;
+        }  else if (timeLeft === 0) {
+            clearInterval(timerInterval);
+            viewHighScoreHandler();
+        }
         if (points > 0) {
             clearInterval(timerInterval);
         }
@@ -94,7 +98,7 @@ var getQuestion = function() {
         quizResultsSection.style.display = "block";
         points = timeLeft;
         document.getElementById("final-score").textContent = "Your final score is " + points;
-        
+        clearInterval(timerInterval);
         // need a reset function
         qIndex = 0;
     }
@@ -125,7 +129,7 @@ document.getElementById("back").addEventListener("click", function(){
     qIndex = 0;
     correct = "";
     points = 0;
-    timer.textContent = "Time: ";
+    timer.textContent = "Time: 0";
     clearInterval(timerInterval);
     headerSection.style.display = "block";
     heroSection.style.display = "block";

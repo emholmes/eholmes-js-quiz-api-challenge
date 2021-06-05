@@ -1,4 +1,8 @@
-
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+}
 
 .hero {
     text-align: center;
@@ -8,6 +12,11 @@
 #quiz {
     display: none;
     text-align: center;
+}
+
+button {
+    display: block;
+    margin: 0 auto;
 }
 
 #quiz-results {
