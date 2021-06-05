@@ -37,14 +37,35 @@ var scoreFormHandler = function(event) {
 
 }
 
+
+var timeLeft;
+var timer = document.getElementById("timer");
+var timerInterval;
+function startTimer() {
+    timeLeft = 75;
+    // execute function ever 1000 ms
+    timerInterval = setInterval(function() {
+        // qIndex max length 2
+        if (timeLeft > 0) {
+            timer.textContent = "Time: "+ timeLeft;
+            timeLeft--;
+        }  
+        if (points > 0) {
+            clearInterval(timerInterval);
+        }
+    }, 1000);
+}
+
+
+
 var buttonChoiceHandler = function(e) {
     if (e.target.textContent === questionsObject[qIndex].answer) {
-        points += 5;
         correct = "Correct!";
         qIndex++;
         getQuestion();
     } else {
         correct = "Wrong!";
+        timeLeft -= 5;
         qIndex++;
         getQuestion();
     }
@@ -71,6 +92,7 @@ var getQuestion = function() {
     } else {
         quizContent.style.display = "none";
         quizResultsSection.style.display = "block";
+        points = timeLeft;
         document.getElementById("final-score").textContent = "Your final score is " + points;
         
         // need a reset function
@@ -103,6 +125,8 @@ document.getElementById("back").addEventListener("click", function(){
     qIndex = 0;
     correct = "";
     points = 0;
+    timer.textContent = "Time: ";
+    clearInterval(timerInterval);
     headerSection.style.display = "block";
     heroSection.style.display = "block";
     quizSection.style.display = "none";
@@ -139,6 +163,7 @@ var loadScores = function () {
 loadScores();
 
 var startQuiz = function() {
+    startTimer();
     heroSection.style.display = "none";
     quizSection.style.display = "block";
     getQuestion();

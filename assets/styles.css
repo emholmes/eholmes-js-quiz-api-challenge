@@ -2,6 +2,7 @@
 
 .hero {
     text-align: center;
+    display: block;
 }
 
 #quiz {
