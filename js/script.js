@@ -66,7 +66,9 @@ function startTimer() {
 
 
 var buttonChoiceHandler = function(e) {
-    if (e.target.textContent === questionsObject[qIndex].answer) {
+    var playerChoice = e.target.textContent;
+    playerChoice = playerChoice.slice(3);
+    if (playerChoice === questionsObject[qIndex].answer) {
         correct = "Correct!";
         qIndex++;
         getQuestion();
@@ -78,11 +80,20 @@ var buttonChoiceHandler = function(e) {
     }
 }
 
-var getQuestion = function() {
+function displayNotification() {
+    var notificationSection = document.querySelector(".notification");
     notification.textContent = correct;
     if (notification.textContent !== "") {
-        notification.style.borderTop = "1px solid #000";
+        notificationSection.style.display = "block";
     }
+    hideNotification = setInterval(function() {
+        notificationSection.style.display = "none";
+        clearInterval(hideNotification);
+    }, 3000);
+}
+
+var getQuestion = function() {
+    displayNotification();
 
     if (qIndex < questionsObject.length) {
         quizContent.style.display = "block";
@@ -91,7 +102,7 @@ var getQuestion = function() {
     
         for (var i = 1; i < 5; i++) {
             var choiceBtn = document.getElementById("btn" + i);
-            choiceBtn.textContent = questionsObject[qIndex]["choice" + i];
+            choiceBtn.textContent = i + ". " + questionsObject[qIndex]["choice" + i];
         }
         let buttonsArray = document.querySelectorAll("#quiz-content button");
 
@@ -102,7 +113,7 @@ var getQuestion = function() {
         quizContent.style.display = "none";
         quizResultsSection.style.display = "block";
         points = timeLeft;
-        document.getElementById("final-score").textContent = "Your final score is " + points;
+        document.getElementById("final-score").textContent = "Your final score is " + points + ".";
         clearInterval(timerInterval);
         // need a reset function
         qIndex = 0;

@@ -68,10 +68,9 @@ nav {
 
 #quiz {
     display: none;
-    width: 52%;
+    width: 50%;
     margin: 0 auto;
     padding-top: 80px;
-    text-align: center;
 }
 
 #quiz-content {
@@ -82,6 +81,8 @@ nav {
     font-size: 26px;
     line-height: normal;
     text-align: left;
+    font-weight: bold;
+    padding-bottom: 10px;
 }
 
 #quiz-content button {
@@ -107,11 +108,15 @@ button:hover {
     background-color: var(--berry-pink);
 }
 
-/* hr {
+hr {
     padding-top: 25px;
     border: none;
     border-bottom: 1px solid #000;
-} */
+}
+
+section .notification {
+    display: none;
+}
 
 #notification {
     text-align: left;
@@ -120,6 +125,12 @@ button:hover {
     font-size: 24px;
     font-style: italic;
     padding-top: 15px;
+}
+
+#score-form label {
+    font-size: 22px;
+    line-height: normal;
+    font-family: var(--sans-serif);
 }
 
 #quiz-results {
