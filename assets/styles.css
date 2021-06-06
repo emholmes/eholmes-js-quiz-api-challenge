@@ -109,12 +109,7 @@ button {
     color: #FFF;
 }
 
-button::selection {
-    cursor: pointer;
-    background-color: var(--berry-pink);
-}
-
-#quiz-results {
+.quiz-results {
     display: none;
 }
 
@@ -149,6 +144,7 @@ button::selection {
     background-color: var(--navy-blue);
     color: #FFF;
     vertical-align: middle;
+    -webkit-appearance: none;
 }
 
 .submit-btn:hover {
@@ -207,7 +203,7 @@ section .notification {
 }
 /* high scores section end */
 
-/* apply hover on browsers with hover capability */
+/* only on browsers with hover capability */
 @media (hover: hover) {
     button:hover {
         cursor: pointer;
@@ -217,6 +213,10 @@ section .notification {
 
 /* vertical tablet */
 @media screen and (max-width: 1024px) {
+    nav {
+        padding: 30px 25px;
+    }
+    
     .hero p, 
     #high-scores {
         width: 80%;
@@ -230,7 +230,8 @@ section .notification {
 /* extra-small screens */
 @media screen and (max-width: 414px) {
     .quiz {
-        width: 87%;
+        width: 100%;
+        padding: 80px 25px 0;
     }
 
     .quiz-content button { 
