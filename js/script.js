@@ -8,17 +8,9 @@ var questionsObject = [
     { question: "What method adds a value to the end of an array?", answer: "push()", choice1: "toEnd()", choice2: "push()", choice3: "join()", choice4: "pop()" }
 ]
 
-var headerSection = document.querySelector("header");
 var heroSection = document.getElementById("hero");
 var quizSection = document.getElementById("quiz");
-var quizResultsSection = document.getElementById("quiz-results");
-var highScoresSection = document.getElementById("high-scores");
-
-var scoreForm = document.getElementById("score-form");
 var notification = document.getElementById("notification");
-var goBackBtn = document.getElementById("back");
-var clearScoresBtn = document.getElementById("clear");
-
 var qIndex = 0;
 var correct;
 var score = 0;
@@ -36,10 +28,11 @@ var createScoreEl = function(playerObj) {
 
 // view high scores link
 var viewHighScoreHandler = function() {
+    var headerSection = document.querySelector("header");
     headerSection.style.display = "none";
     heroSection.style.display = "none";
     quizSection.style.display = "none";
-    quizResultsSection.style.display = "none";
+    var highScoresSection = document.getElementById("high-scores");
     highScoresSection.style.display = "block";
 } 
 
@@ -57,7 +50,7 @@ var scoreFormHandler = function(event) {
     createScoreEl(playerObj);
     saveScore();
 
-    scoreForm.reset();
+    document.getElementById("score-form").reset();
 
     viewHighScoreHandler();
 }
@@ -118,6 +111,7 @@ var getQuestion = function() {
     } else {
         var quizContent = document.getElementById("quiz-content");
         quizContent.style.display = "none";
+        var quizResultsSection = document.getElementById("quiz-results");
         quizResultsSection.style.display = "block";
         score = timeLeft;
         document.getElementById("final-score").textContent = "Your final score is " + score + ".";
@@ -190,10 +184,10 @@ document.getElementById("startQuizBtn").addEventListener("click", startQuiz);
 document.getElementById("view-scores").addEventListener("click", viewHighScoreHandler);
 
 // eventLlistener for final score submit button
-scoreForm.addEventListener("submit", scoreFormHandler);
+document.getElementById("score-form").addEventListener("submit", scoreFormHandler);
 
 // eventListener for go back button on high score view
-goBackBtn.addEventListener("click", goBackHandler);
+document.getElementById("back").addEventListener("click", goBackHandler);
 
 // eventListener to clear high scores from local storage
-clearScoresBtn.addEventListener("click", clearHighScoresHandler);
+document.getElementById("clear").addEventListener("click", clearHighScoresHandler);
