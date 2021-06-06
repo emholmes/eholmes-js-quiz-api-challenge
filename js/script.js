@@ -2,9 +2,9 @@
 var questionsObject = [
     { question: "Which are primitive data types in javascript?", answer: "all of the above", choice1: "number", choice2: "string", choice3: "boolean", choice4: "all of the above" }, 
     { question: "What method stops the setInterval() method's function from continuing to be called?", answer: "clearInterval()", choice1: "stop()", choice2: "stopInterval()", choice3: "clearSet()", choice4: "clearInterval()" }, 
-    { question: "Which of the following are 'falsy' values in javascript?", answer: "all of the above", choice1: "NaN", choice2: "null", choice3: "undefined", choice4: "all of the above" }, 
     { question: "Select the answer with the correct syntax of a for statement.", answer: "for (var i = 0; i < 10; i++) {}", choice1: "for (var i = 0; i < 10; i++) {}", choice2: "for (var i = 0, i < 10, i++) {}", choice3: "for (i = 0; i++) {}", choice4: "for (if i = 0; i < 10; i++) {}" }, 
-    { question: "Javascript is a _________ programming language.", answer: "dynamic", choice1: "styling", choice2: "java", choice3: "styling", choice4: "dynamic" }, 
+    { question: "Which of the following are 'falsy' values in javascript?", answer: "all of the above", choice1: "NaN", choice2: "null", choice3: "undefined", choice4: "all of the above" }, 
+    { question: "Javascript is a _________ programming language.", answer: "dynamic", choice1: "styling", choice2: "java", choice3: "markup", choice4: "dynamic" }, 
     { question: "What method adds a value to the end of an array?", answer: "push()", choice1: "toEnd()", choice2: "push()", choice3: "join()", choice4: "pop()" }
 ]
 
@@ -21,17 +21,17 @@ var clearScoresBtn = document.getElementById("clear");
 
 var qIndex = 0;
 var correct;
-var points = 0;
-var player = [];
+var score = 0;
+var savedPlayers = [];
 
 // create list item with player info in high score view
-var createScoreEl = function(scoreObj) {
+var createScoreEl = function(playerObj) {
     var listItem = document.createElement("li");
     listItem.classname = "score";
-    listItem.textContent = scoreObj.name + " - " + scoreObj.score;
+    listItem.textContent = playerObj.name + " - " + playerObj.score;
     var olElement = document.getElementById("scores-list");
     olElement.appendChild(listItem);
-    player.push(scoreObj);
+    savedPlayers.push(playerObj);
 }
 
 // view high scores link
@@ -47,14 +47,14 @@ var viewHighScoreHandler = function() {
 var scoreFormHandler = function(event) {
     event.preventDefault();
 
-    var playerScore = points;
+    var playerScore = score;
     var playerName = document.getElementById("player-initials").value;
 
-    var scoreObj = {
+    var playerObj = {
         name: playerName,
         score: playerScore
     };
-    createScoreEl(scoreObj);
+    createScoreEl(playerObj);
     saveScore();
 
     scoreForm.reset();
@@ -77,7 +77,7 @@ function startTimer() {
             clearInterval(timerInterval);
             viewHighScoreHandler();
         }
-        if (points > 0) {
+        if (score > 0) {
             clearInterval(timerInterval);
         }
     }, 1000);
@@ -103,7 +103,6 @@ var getQuestion = function() {
     }
     notificationTimeout();
     if (qIndex < questionsObject.length) {
-        quizContent.style.display = "block";
         var question = document.getElementById("question");
         question.textContent = questionsObject[qIndex].question;
     
@@ -119,8 +118,8 @@ var getQuestion = function() {
     } else {
         quizContent.style.display = "none";
         quizResultsSection.style.display = "block";
-        points = timeLeft;
-        document.getElementById("final-score").textContent = "Your final score is " + points + ".";
+        score = timeLeft;
+        document.getElementById("final-score").textContent = "Your final score is " + score + ".";
         clearInterval(timerInterval);
         // need a reset function
         qIndex = 0;
@@ -147,7 +146,7 @@ var buttonChoiceHandler = function(e) {
 var goBackHandler = function() {
     qIndex = 0;
     correct = "";
-    points = 0;
+    score = 0;
     timer.textContent = "Time: 0";
     clearInterval(timerInterval);
     headerSection.style.display = "block";
@@ -168,7 +167,7 @@ var clearHighScoresHandler = function() {
 
 // save players submitted score to local storage
 var saveScore = function() {
-    localStorage.setItem("scores", JSON.stringify(player));
+    localStorage.setItem("scores", JSON.stringify(savedPlayers));
 }
 
 var loadScores = function () {
