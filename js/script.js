@@ -16,7 +16,6 @@ var notificationMessage;
 var finalScore = 0;
 var playerScores = [];
 
-// view high scores link
 var viewHighScores = function() {
     document.querySelector("header").style.display = "none";
     heroSection.style.display = "none";
@@ -24,12 +23,10 @@ var viewHighScores = function() {
     document.getElementById("high-scores").style.display = "block";
 } 
 
-// go back button
 var clickedGoBackButton = function() {
     window.location.reload();
 }
 
-// clear score page eventListener
 var clickedClearHighScores = function() {
     localStorage.clear();
     var listItems = document.querySelectorAll("#scores-list li");
@@ -48,7 +45,6 @@ var createScoreRow = function(playerObj) {
     playerScores.push(playerObj);
 }
 
-// handler for player score submit button
 var submitScoreForm = function(event) {
     event.preventDefault();
 
@@ -67,7 +63,7 @@ var submitScoreForm = function(event) {
     viewHighScores();
 }
 
-// handler for answer choice buttons
+// click handler for answer choice buttons
 var clickedAnswerButton = function(e) {
     var playerChoice = e.target.textContent;
     playerChoice = playerChoice.slice(3);
@@ -83,8 +79,6 @@ var clickedAnswerButton = function(e) {
     }
 }
 
-// notification displays if user correctly answered previous question
-// disappears(timeout) after 2 seconds
 var notificationTimeout;
 var notificationSection = document.querySelector(".notification");
 var hideNotificationWithDelay = function(delay) {
@@ -95,6 +89,7 @@ var hideNotificationWithDelay = function(delay) {
     }, delay);
 }
 
+// notification for previous q&a result
 var displayNotification = function() {
     clearTimeout(notificationTimeout);
     var notification = document.getElementById("notification");
@@ -149,7 +144,6 @@ var displayQuestion = function() {
         finalScore = timeLeft;
         document.getElementById("final-score").textContent = "Your final score is " + finalScore + ".";
         clearInterval(timerInterval);
-        // need a reset function
         questionIndex = 0;
     }
 }
