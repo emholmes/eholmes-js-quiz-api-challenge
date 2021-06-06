@@ -10,7 +10,7 @@
 <body>
     <header>
         <nav>
-            <p id="view-scores">View high scores</p>
+            <p class="view-scores" id="view-scores">View high scores</p>
             <p id="timer">Time: 0</p>
         </nav>
     </header>
@@ -21,18 +21,18 @@
             <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
             <button id="startQuizBtn">Start Quiz</button>
         </section>
-        <section id="quiz">
-            <section id="quiz-content">
+        <section class="quiz" id="quiz">
+            <section class="quiz-content" id="quiz-content">
                 <p id="question"></p>
                 <button id="btn1"></button>
                 <button id="btn2"></button>
                 <button id="btn3"></button>
                 <button id="btn4"></button>
             </section>
-            <section id="quiz-results">
+            <section class="quiz-results" id="quiz-results">
                 <h3>All done!</h3>
                 <p id="final-score"></p>
-                <form id="score-form">
+                <form class="score-form" id="score-form">
                     <label for="player-initials">Enter initials: </label>
                     <input class="initials-input" type="text" id="player-initials" name="player-initials" required>
                     <input class="submit-btn" type="submit" type="submit" value="Submit">
@@ -44,7 +44,7 @@
             </section> 
         </section>
         
-        <section id="high-scores">
+        <section class="high-scores" id="high-scores">
             <h3>High scores</h3>
             <ol id="scores-list"></ol>
             <button id="back">Go back</button>
