@@ -74,6 +74,7 @@ var clickedAnswerButton = function(e) {
     } else {
         notificationMessage = "Wrong!";
         timeLeft -= 10;
+        timer.textContent= "Time: " + timeLeft;
         questionIndex++;
         displayQuestion();
     }
@@ -106,11 +107,11 @@ var timer = document.getElementById("timer");
 var timerInterval;
 var startTimer = function() {
     timeLeft = 75;
-    timer.textContent = "Time: "+ timeLeft;
+    timer.textContent = "Time: " + timeLeft;
     timerInterval = setInterval(function() {
         if (timeLeft > 0) {
             timeLeft--;
-            timer.textContent = "Time: "+ timeLeft;
+            timer.textContent = "Time: " + timeLeft;
         }  else if (timeLeft === 0) {
             clearInterval(timerInterval);
             viewHighScores();
