@@ -69,7 +69,7 @@ nav {
 
 #quiz {
     display: none;
-    width: 50%;
+    width: 52%;
     margin: 0 auto;
     padding-top: 80px;
 }
@@ -110,7 +110,6 @@ button:hover {
 }
 
 hr {
-    padding-top: 25px;
     border: none;
     border-bottom: 1px solid #000;
 }
@@ -148,6 +147,9 @@ section .notification {
 
 #high-scores {
     display: none;
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 80px;
 }
 
 #high-scores ol {
@@ -196,9 +198,20 @@ section .notification {
     background-color: var(--berry-pink);
 }
 
-#high-scores {
-    width: 60%;
-    margin: 0 auto;
-    padding-top: 80px;
+/* vertical tablet */
+@media screen and (max-width: 1024px) {
+    .hero p, #high-scores {
+        width: 80%;
+    }
+
+    #quiz {
+        width: 72%;
+    }
+
 }
 
+@media screen and (max-width: 524px) {
+    #quiz {
+        width: 80%;
+    }
+}

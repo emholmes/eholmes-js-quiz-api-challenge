@@ -71,32 +71,37 @@ function startTimer() {
 var buttonChoiceHandler = function(e) {
     var playerChoice = e.target.textContent;
     playerChoice = playerChoice.slice(3);
-    // debugger;
-    clearInterval(hideNotification);
     if (playerChoice === questionsObject[qIndex].answer) {
         correct = "Correct!";
         qIndex++;
         getQuestion();
     } else {
         correct = "Wrong!";
-        timeLeft -= 5;
+        timeLeft -= 10;
         qIndex++;
         getQuestion();
     }
 }
 
+var hideNotification;
+var notificationSection = document.querySelector(".notification");
+var notificationTimeout = function() {
+    hideNotification = setTimeout(function() {
+        clearTimeout(hideNotification);
+        notificationSection.style.display = "none";
+        
+    }, 2000);
+}
 
 var getQuestion = function() {
-    var notificationSection = document.querySelector(".notification");
+    clearTimeout(hideNotification);
+    
     notification.textContent = correct;
+    
     if (notification.textContent !== "") {
         notificationSection.style.display = "block";
     }
-    hideNotification = setInterval(function() {
-        clearInterval(hideNotification);
-        notificationSection.style.display = "none";
-        
-    }, 1000);
+    notificationTimeout();
     if (qIndex < questionsObject.length) {
         quizContent.style.display = "block";
         var question = document.getElementById("question");
