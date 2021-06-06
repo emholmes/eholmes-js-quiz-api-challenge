@@ -16,6 +16,28 @@ var notificationMessage;
 var finalScore = 0;
 var playerScores = [];
 
+// view high scores link
+var viewHighScores = function() {
+    document.querySelector("header").style.display = "none";
+    heroSection.style.display = "none";
+    quizSection.style.display = "none";
+    document.getElementById("high-scores").style.display = "block";
+} 
+
+// go back button
+var clickedGoBackButton = function() {
+    window.location.reload();
+}
+
+// clear score page eventListener
+var clickedClearHighScores = function() {
+    localStorage.clear();
+    var listItems = document.querySelectorAll("#scores-list li");
+    for (var item of listItems) {
+        item.remove();
+    }
+}
+
 // create list item with player info in high score view
 var createScoreRow = function(playerObj) {
     var listItem = document.createElement("li");
@@ -25,14 +47,6 @@ var createScoreRow = function(playerObj) {
     olElement.appendChild(listItem);
     playerScores.push(playerObj);
 }
-
-// view high scores link
-var viewHighScores = function() {
-    document.querySelector("header").style.display = "none";
-    heroSection.style.display = "none";
-    quizSection.style.display = "none";
-    document.getElementById("high-scores").style.display = "block";
-} 
 
 // handler for player score submit button
 var submitScoreForm = function(event) {
@@ -53,25 +67,20 @@ var submitScoreForm = function(event) {
     viewHighScores();
 }
 
-// quiz timer/countdown 
-var timeLeft;
-var timer = document.getElementById("timer");
-var timerInterval;
-var startTimer = function() {
-    timeLeft = 75;
-    timer.textContent = "Time: "+ timeLeft;
-    timerInterval = setInterval(function() {
-        if (timeLeft > 0) {
-            timeLeft--;
-            timer.textContent = "Time: "+ timeLeft;
-        }  else if (timeLeft === 0) {
-            clearInterval(timerInterval);
-            viewHighScores();
-        }
-        if (finalScore > 0) {
-            clearInterval(timerInterval);
-        }
-    }, 1000);
+// handler for answer choice buttons
+var clickedAnswerButton = function(e) {
+    var playerChoice = e.target.textContent;
+    playerChoice = playerChoice.slice(3);
+    if (playerChoice === questionsObject[questionIndex].answer) {
+        notificationMessage = "Correct!";
+        questionIndex++;
+        displayQuestion();
+    } else {
+        notificationMessage = "Wrong!";
+        timeLeft -= 10;
+        questionIndex++;
+        displayQuestion();
+    }
 }
 
 // notification displays if user correctly answered previous question
@@ -94,6 +103,27 @@ var displayNotification = function() {
         notificationSection.style.display = "block";
     }
     hideNotificationWithDelay(2000);
+}
+
+// quiz timer/countdown 
+var timeLeft;
+var timer = document.getElementById("timer");
+var timerInterval;
+var startTimer = function() {
+    timeLeft = 75;
+    timer.textContent = "Time: "+ timeLeft;
+    timerInterval = setInterval(function() {
+        if (timeLeft > 0) {
+            timeLeft--;
+            timer.textContent = "Time: "+ timeLeft;
+        }  else if (timeLeft === 0) {
+            clearInterval(timerInterval);
+            viewHighScores();
+        }
+        if (finalScore > 0) {
+            clearInterval(timerInterval);
+        }
+    }, 1000);
 }
 
 var displayQuestion = function() {
@@ -121,36 +151,6 @@ var displayQuestion = function() {
         clearInterval(timerInterval);
         // need a reset function
         questionIndex = 0;
-    }
-}
-
-// handler for answer choice buttons
-var clickedAnswerButton = function(e) {
-    var playerChoice = e.target.textContent;
-    playerChoice = playerChoice.slice(3);
-    if (playerChoice === questionsObject[questionIndex].answer) {
-        notificationMessage = "Correct!";
-        questionIndex++;
-        displayQuestion();
-    } else {
-        notificationMessage = "Wrong!";
-        timeLeft -= 10;
-        questionIndex++;
-        displayQuestion();
-    }
-}
-
-// go back button
-var clickedGoBackButton = function() {
-    window.location.reload();
-}
-
-// clear score page eventListener
-var clickedClearHighScores = function() {
-    localStorage.clear();
-    var listItems = document.querySelectorAll("#scores-list li");
-    for (var item of listItems) {
-        item.remove();
     }
 }
 
