@@ -10,11 +10,12 @@ var questionsObject = [
 
 var heroSection = document.getElementById("hero");
 var quizSection = document.getElementById("quiz");
-var notification = document.getElementById("notification");
+
+
 var qIndex = 0;
 var correct;
 var score = 0;
-var savedPlayers = [];
+var playerScores = [];
 
 // create list item with player info in high score view
 var createScoreEl = function(playerObj) {
@@ -23,17 +24,15 @@ var createScoreEl = function(playerObj) {
     listItem.textContent = playerObj.name + " - " + playerObj.score;
     var olElement = document.getElementById("scores-list");
     olElement.appendChild(listItem);
-    savedPlayers.push(playerObj);
+    playerScores.push(playerObj);
 }
 
 // view high scores link
 var viewHighScoreHandler = function() {
-    var headerSection = document.querySelector("header");
-    headerSection.style.display = "none";
+    document.querySelector("header").style.display = "none";
     heroSection.style.display = "none";
     quizSection.style.display = "none";
-    var highScoresSection = document.getElementById("high-scores");
-    highScoresSection.style.display = "block";
+    document.getElementById("high-scores").style.display = "block";
 } 
 
 // handler for player score submit button
@@ -90,6 +89,7 @@ var notificationTimeout = function() {
 
 var getQuestion = function() {
     clearTimeout(hideNotification);
+    var notification = document.getElementById("notification");
     notification.textContent = correct;
     if (notification.textContent !== "") {
         notificationSection.style.display = "block";
@@ -153,7 +153,7 @@ var clearHighScoresHandler = function() {
 
 // save players submitted score to local storage
 var saveScore = function() {
-    localStorage.setItem("scores", JSON.stringify(savedPlayers));
+    localStorage.setItem("scores", JSON.stringify(playerScores));
 }
 
 var loadScores = function () {
