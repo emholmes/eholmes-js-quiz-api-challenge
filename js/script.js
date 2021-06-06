@@ -1,3 +1,4 @@
+// object holding all questions and answers
 var questionsObject = [
     { question: "Which are primitive data types in javascript?", answer: "all of the above", choice1: "number", choice2: "string", choice3: "boolean", choice4: "all of the above" }, 
     { question: "What method stops the setInterval() method's function from continuing to be called?", answer: "clearInterval()", choice1: "stop()", choice2: "stopInterval()", choice3: "clearSet()", choice4: "clearInterval()" }, 
@@ -15,119 +16,15 @@ var quizResultsSection = document.getElementById("quiz-results");
 var highScoresSection = document.getElementById("high-scores");
 var scoreForm = document.getElementById("score-form");
 var notification = document.getElementById("notification");
+var goBackBtn = document.getElementById("back");
+var clearScoresBtn = document.getElementById("clear");
 
 var qIndex = 0;
 var correct;
 var points = 0;
 var player = [];
 
-var scoreFormHandler = function(event) {
-    event.preventDefault();
-
-    notification.textContent = "";
-    notification.style.borderTop = "none";
-    var playerScore = points;
-    var playerName = document.querySelector("input[name='player-initials']").value;
-
-    var scoreObj = {
-        name: playerName,
-        score: playerScore
-    };
-    createScoreEl(scoreObj);
-
-    saveScore();
-
-    scoreForm.reset();
-
-    viewHighScoreHandler();
-
-}
-
-
-var timeLeft;
-var timer = document.getElementById("timer");
-var timerInterval;
-function startTimer() {
-    timeLeft = 75;
-    timer.textContent = "Time: "+ timeLeft;
-    // execute function ever 1000 ms
-    timerInterval = setInterval(function() {
-        // qIndex max length 2
-        if (timeLeft > 0) {
-            timeLeft--;
-            timer.textContent = "Time: "+ timeLeft;
-        }  else if (timeLeft === 0) {
-            clearInterval(timerInterval);
-            viewHighScoreHandler();
-        }
-        if (points > 0) {
-            clearInterval(timerInterval);
-        }
-    }, 1000);
-}
-
-
-
-var buttonChoiceHandler = function(e) {
-    var playerChoice = e.target.textContent;
-    playerChoice = playerChoice.slice(3);
-    if (playerChoice === questionsObject[qIndex].answer) {
-        correct = "Correct!";
-        qIndex++;
-        getQuestion();
-    } else {
-        correct = "Wrong!";
-        timeLeft -= 10;
-        qIndex++;
-        getQuestion();
-    }
-}
-
-var hideNotification;
-var notificationSection = document.querySelector(".notification");
-var notificationTimeout = function() {
-    hideNotification = setTimeout(function() {
-        clearTimeout(hideNotification);
-        notificationSection.style.display = "none";
-        
-    }, 2000);
-}
-
-var getQuestion = function() {
-    clearTimeout(hideNotification);
-    
-    notification.textContent = correct;
-    
-    if (notification.textContent !== "") {
-        notificationSection.style.display = "block";
-    }
-    notificationTimeout();
-    if (qIndex < questionsObject.length) {
-        quizContent.style.display = "block";
-        var question = document.getElementById("question");
-        question.textContent = questionsObject[qIndex].question;
-    
-        for (var i = 1; i < 5; i++) {
-            var choiceBtn = document.getElementById("btn" + i);
-            choiceBtn.textContent = i + ". " + questionsObject[qIndex]["choice" + i];
-        }
-        let buttonsArray = document.querySelectorAll("#quiz-content button");
-
-        for (var button of buttonsArray) {
-            button.addEventListener("click", buttonChoiceHandler);
-        }
-    } else {
-        quizContent.style.display = "none";
-        quizResultsSection.style.display = "block";
-        points = timeLeft;
-        document.getElementById("final-score").textContent = "Your final score is " + points + ".";
-        clearInterval(timerInterval);
-        // need a reset function
-        qIndex = 0;
-    }
-}
-
-
+// create list item with player info in high score view
 var createScoreEl = function(scoreObj) {
     var listItem = document.createElement("li");
     listItem.classname = "score";
@@ -146,10 +43,108 @@ var viewHighScoreHandler = function() {
     highScoresSection.style.display = "block";
 } 
 
-document.getElementById("view-scores").addEventListener("click", viewHighScoreHandler);
+// handler for player score submit button
+var scoreFormHandler = function(event) {
+    event.preventDefault();
 
-//go back button
-document.getElementById("back").addEventListener("click", function(){
+    var playerScore = points;
+    var playerName = document.getElementById("player-initials").value;
+
+    var scoreObj = {
+        name: playerName,
+        score: playerScore
+    };
+    createScoreEl(scoreObj);
+    saveScore();
+
+    scoreForm.reset();
+
+    viewHighScoreHandler();
+}
+
+// quiz timer/countdown 
+var timeLeft;
+var timer = document.getElementById("timer");
+var timerInterval;
+function startTimer() {
+    timeLeft = 75;
+    timer.textContent = "Time: "+ timeLeft;
+    timerInterval = setInterval(function() {
+        if (timeLeft > 0) {
+            timeLeft--;
+            timer.textContent = "Time: "+ timeLeft;
+        }  else if (timeLeft === 0) {
+            clearInterval(timerInterval);
+            viewHighScoreHandler();
+        }
+        if (points > 0) {
+            clearInterval(timerInterval);
+        }
+    }, 1000);
+}
+
+// notification displays if user correctly answered previous question
+// disappears(timeout) after 2 seconds
+var hideNotification;
+var notificationSection = document.querySelector(".notification");
+var notificationTimeout = function() {
+    hideNotification = setTimeout(function() {
+        clearTimeout(hideNotification);
+        notificationSection.style.display = "none";
+        
+    }, 2000);
+}
+
+var getQuestion = function() {
+    clearTimeout(hideNotification);
+    notification.textContent = correct;
+    if (notification.textContent !== "") {
+        notificationSection.style.display = "block";
+    }
+    notificationTimeout();
+    if (qIndex < questionsObject.length) {
+        quizContent.style.display = "block";
+        var question = document.getElementById("question");
+        question.textContent = questionsObject[qIndex].question;
+    
+        for (var i = 1; i < 5; i++) {
+            var choiceBtn = document.getElementById("btn" + i);
+            choiceBtn.textContent = i + ". " + questionsObject[qIndex]["choice" + i];
+        }
+        let buttonsArray = document.querySelectorAll("#quiz-content button");
+        // event listener for question answer choice buttons
+        for (var button of buttonsArray) {
+            button.addEventListener("click", buttonChoiceHandler);
+        }
+    } else {
+        quizContent.style.display = "none";
+        quizResultsSection.style.display = "block";
+        points = timeLeft;
+        document.getElementById("final-score").textContent = "Your final score is " + points + ".";
+        clearInterval(timerInterval);
+        // need a reset function
+        qIndex = 0;
+    }
+}
+
+// handler for answer choice buttons
+var buttonChoiceHandler = function(e) {
+    var playerChoice = e.target.textContent;
+    playerChoice = playerChoice.slice(3);
+    if (playerChoice === questionsObject[qIndex].answer) {
+        correct = "Correct!";
+        qIndex++;
+        getQuestion();
+    } else {
+        correct = "Wrong!";
+        timeLeft -= 10;
+        qIndex++;
+        getQuestion();
+    }
+}
+
+// go back button
+var goBackHandler = function() {
     qIndex = 0;
     correct = "";
     points = 0;
@@ -160,18 +155,18 @@ document.getElementById("back").addEventListener("click", function(){
     quizSection.style.display = "none";
     quizResultsSection.style.display = "none";
     highScoresSection.style.display = "none";
-});
+}
 
-// clear score page
-document.getElementById("clear").addEventListener("click", function(){
+// clear score page eventListener
+var clearHighScoresHandler = function() {
     localStorage.clear();
     var listItems = document.querySelectorAll("#scores-list li");
     for (var item of listItems) {
         item.remove();
     }
-});
+}
 
-
+// save players submitted score to local storage
 var saveScore = function() {
     localStorage.setItem("scores", JSON.stringify(player));
 }
@@ -187,7 +182,7 @@ var loadScores = function () {
         createScoreEl(savedScores[i], i);
     }
 }
-
+// load any existing scores once
 loadScores();
 
 var startQuiz = function() {
@@ -197,6 +192,17 @@ var startQuiz = function() {
     getQuestion();
 }
 
+// eventListener for "Start Quiz" clicks
+document.getElementById("startQuizBtn").addEventListener("click", startQuiz);
+
+// eventListener for "View high scores" clicks
+document.getElementById("view-scores").addEventListener("click", viewHighScoreHandler);
+
+// eventLlistener for final score submit button
 scoreForm.addEventListener("submit", scoreFormHandler);
 
-document.getElementById("startQuizBtn").addEventListener("click", startQuiz);
+// eventListener for go back button on high score view
+goBackBtn.addEventListener("click", goBackHandler);
+
+// eventListener to clear high scores from local storage
+clearScoresBtn.addEventListener("click", clearHighScoresHandler);
