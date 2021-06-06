@@ -11,9 +11,9 @@ var questionsObject = [
 var headerSection = document.querySelector("header");
 var heroSection = document.getElementById("hero");
 var quizSection = document.getElementById("quiz");
-var quizContent = document.getElementById("quiz-content");
 var quizResultsSection = document.getElementById("quiz-results");
 var highScoresSection = document.getElementById("high-scores");
+
 var scoreForm = document.getElementById("score-form");
 var notification = document.getElementById("notification");
 var goBackBtn = document.getElementById("back");
@@ -116,6 +116,7 @@ var getQuestion = function() {
             button.addEventListener("click", buttonChoiceHandler);
         }
     } else {
+        var quizContent = document.getElementById("quiz-content");
         quizContent.style.display = "none";
         quizResultsSection.style.display = "block";
         score = timeLeft;
@@ -144,16 +145,7 @@ var buttonChoiceHandler = function(e) {
 
 // go back button
 var goBackHandler = function() {
-    qIndex = 0;
-    correct = "";
-    score = 0;
-    timer.textContent = "Time: 0";
-    clearInterval(timerInterval);
-    headerSection.style.display = "block";
-    heroSection.style.display = "block";
-    quizSection.style.display = "none";
-    quizResultsSection.style.display = "none";
-    highScoresSection.style.display = "none";
+    window.location.reload();
 }
 
 // clear score page eventListener
