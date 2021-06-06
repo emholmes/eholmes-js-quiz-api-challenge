@@ -111,6 +111,7 @@ button {
 
 .quiz-results {
     display: none;
+    padding-bottom: 30px;
 }
 
 .quiz-results p {
@@ -248,7 +249,7 @@ section .notification {
     }
 
     .submit-btn {
-        margin: 15px 0 30px;
+        margin-top: 15px;
     }
 
 
