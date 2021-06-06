@@ -4,7 +4,7 @@ var questionsObject = [
     { question: "What method stops the setInterval() method's function from continuing to be called?", answer: "clearInterval()", choice1: "stop()", choice2: "stopInterval()", choice3: "clearSet()", choice4: "clearInterval()" }, 
     { question: "Select the answer with the correct syntax of a for statement.", answer: "for (var i = 0; i < 10; i++) {}", choice1: "for (var i = 0; i < 10; i++) {}", choice2: "for (var i = 0, i < 10, i++) {}", choice3: "for (i = 0; i++) {}", choice4: "for (if i = 0; i < 10; i++) {}" }, 
     { question: "Which of the following are 'falsy' values in javascript?", answer: "all of the above", choice1: "NaN", choice2: "null", choice3: "undefined", choice4: "all of the above" }, 
-    { question: "Javascript is a _________ programming language.", answer: "dynamic", choice1: "styling", choice2: "java", choice3: "markup", choice4: "dynamic" }, 
+    { question: "Javascript is a ______ programming language.", answer: "dynamic", choice1: "styling", choice2: "java", choice3: "markup", choice4: "dynamic" }, 
     { question: "What method adds a value to the end of an array?", answer: "push()", choice1: "toEnd()", choice2: "push()", choice3: "join()", choice4: "pop()" }
 ]
 

@@ -22,7 +22,7 @@ body {
 h1 {
     font-family: var(--sans-serif);
     font-size: 40px;
-    padding-bottom: 30px;
+    padding: 0 10px 30px;
 }
 
 h3 {
@@ -104,7 +104,7 @@ button {
     color: #FFF;
 }
 
-button:hover {
+button:active {
     cursor: pointer;
     background-color: var(--berry-pink);
 }
@@ -210,8 +210,42 @@ section .notification {
 
 }
 
+@media (hover: hover) {
+    button:hover {
+        cursor: pointer;
+        background-color: var(--berry-pink);
+    }
+}
+
+/* small screens */
 @media screen and (max-width: 524px) {
     #quiz {
         width: 80%;
     }
+}
+
+/* extra-small screens */
+@media screen and (max-width: 414px) {
+    #quiz {
+        width: 87%;
+    }
+
+    #quiz-content button { 
+        width: 100%;
+    }
+
+    #high-scores button:nth-of-type(2) {
+        margin-left: 0;
+    }
+
+    .initials-input {
+        width: 63%;
+    }
+
+    .submit-btn {
+        display: block;
+        margin-top: 20px;
+    }
+
+
 }
